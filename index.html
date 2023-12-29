@@ -118,78 +118,78 @@
     }
   </script>
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Load existing introductions from localStorage when the page loads
-    loadIntroductions();
+    document.addEventListener("DOMContentLoaded", function () {
+      // Load existing introductions from localStorage when the page loads
+      loadIntroductions();
 
-    // Set up the event listener for the form submission
-    document.getElementById("submission-form").addEventListener("submit", function (event) {
-      event.preventDefault();
-      submitIntroduction();
+      // Set up the event listener for the form submission
+      document.getElementById("submission-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        submitIntroduction();
+      });
     });
-  });
 
-  function submitIntroduction() {
-    var name = document.getElementById("memberName").value;
-    var introduction = document.getElementById("memberIntroduction").value;
-    var socialMedia = document.getElementById("socialMedia").value;
+    function submitIntroduction() {
+      var name = document.getElementById("memberName").value;
+      var introduction = document.getElementById("memberIntroduction").value;
+      var socialMedia = document.getElementById("socialMedia").value;
 
-    var container = document.getElementById("members-container");
-    var newMember = document.createElement("div");
-    newMember.className = "member";
-    newMember.innerHTML = "<h2>" + name + "</h2><p>" + introduction + "</p>";
-
-    // Display social media links if provided
-    if (socialMedia.trim() !== "") {
-      var socialMediaParagraph = document.createElement("p");
-      socialMediaParagraph.innerHTML = "Social Media: " + socialMedia;
-      newMember.appendChild(socialMediaParagraph);
-    }
-
-    container.appendChild(newMember);
-
-    // Save the new introduction to localStorage
-    saveIntroduction(name, introduction, socialMedia);
-
-    // Clear the form
-    document.getElementById("submission-form").reset();
-  }
-
-  function saveIntroduction(name, introduction, socialMedia) {
-    // Retrieve existing introductions from localStorage
-    var existingIntroductions = JSON.parse(localStorage.getItem("introductions")) || [];
-
-    // Add the new introduction
-    var newIntroduction = { name: name, introduction: introduction, socialMedia: socialMedia };
-    existingIntroductions.push(newIntroduction);
-
-    // Save the updated introductions back to localStorage
-    localStorage.setItem("introductions", JSON.stringify(existingIntroductions));
-  }
-
-  function loadIntroductions() {
-    var container = document.getElementById("members-container");
-
-    // Retrieve introductions from localStorage
-    var existingIntroductions = JSON.parse(localStorage.getItem("introductions")) || [];
-
-    // Display each introduction
-    existingIntroductions.forEach(function (introduction) {
+      var container = document.getElementById("members-container");
       var newMember = document.createElement("div");
       newMember.className = "member";
-      newMember.innerHTML = "<h2>" + introduction.name + "</h2><p>" + introduction.introduction + "</p>";
+      newMember.innerHTML = "<h2>" + name + "</h2><p>" + introduction + "</p>";
 
       // Display social media links if provided
-      if (introduction.socialMedia && introduction.socialMedia.trim() !== "") {
+      if (socialMedia.trim() !== "") {
         var socialMediaParagraph = document.createElement("p");
-        socialMediaParagraph.innerHTML = "Social Media: " + introduction.socialMedia;
+        socialMediaParagraph.innerHTML = "Social Media: " + socialMedia;
         newMember.appendChild(socialMediaParagraph);
       }
 
       container.appendChild(newMember);
-    });
-  }
-</script>
+
+      // Save the new introduction to localStorage
+      saveIntroduction(name, introduction, socialMedia);
+
+      // Clear the form
+      document.getElementById("submission-form").reset();
+    }
+
+    function saveIntroduction(name, introduction, socialMedia) {
+      // Retrieve existing introductions from localStorage
+      var existingIntroductions = JSON.parse(localStorage.getItem("introductions")) || [];
+
+      // Add the new introduction
+      var newIntroduction = { name: name, introduction: introduction, socialMedia: socialMedia };
+      existingIntroductions.push(newIntroduction);
+
+      // Save the updated introductions back to localStorage
+      localStorage.setItem("introductions", JSON.stringify(existingIntroductions));
+    }
+
+    function loadIntroductions() {
+      var container = document.getElementById("members-container");
+
+      // Retrieve introductions from localStorage
+      var existingIntroductions = JSON.parse(localStorage.getItem("introductions")) || [];
+
+      // Display each introduction
+      existingIntroductions.forEach(function (introduction) {
+        var newMember = document.createElement("div");
+        newMember.className = "member";
+        newMember.innerHTML = "<h2>" + introduction.name + "</h2><p>" + introduction.introduction + "</p>";
+
+        // Display social media links if provided
+        if (introduction.socialMedia && introduction.socialMedia.trim() !== "") {
+          var socialMediaParagraph = document.createElement("p");
+          socialMediaParagraph.innerHTML = "Social Media: " + introduction.socialMedia;
+          newMember.appendChild(socialMediaParagraph);
+        }
+
+        container.appendChild(newMember);
+      });
+    }
+  </script>
 
 
 </body>
