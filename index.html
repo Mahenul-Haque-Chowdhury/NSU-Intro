@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Introductions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .member {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #18b93b;
+      border-radius: 5px;
+    }
+
+    form {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      text-align: left;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #0fd8a6;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #7b08a8;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #443908;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Welcome to Our Group Introductions Page!</h1>
+    <p>Hello, everyone! Feel free to drop your introductions below. We're excited to learn more about each other.</p>
+
+    <div id="members-container"></div>
+
+    <h2>Enter your details here
+    </h2>
+    <form id="submission-form">
+      <label for="memberName">Your Name:</label>
+      <input type="text" id="memberName" required>
+
+      <label for="memberIntroduction">Introduction:</label>
+      <textarea id="memberIntroduction" required></textarea>
+
+      <label for="socialMedia">Social Media Links:</label>
+      <input type="text" id="socialMedia" placeholder="e.g., Twitter: https://twitter.com/your_username">
+
+      <button type="button" onclick="submitIntroduction()">Submit</button>
+    </form>
+
+  </div>
+
+  <script>
+    function submitIntroduction() {
+      var name = document.getElementById("memberName").value;
+      var introduction = document.getElementById("memberIntroduction").value;
+      var socialMedia = document.getElementById("socialMedia").value;
+
+      var container = document.getElementById("members-container");
+      var newMember = document.createElement("div");
+      newMember.className = "member";
+      newMember.innerHTML = "<h2>" + name + "</h2><p>" + introduction + "</p>";
+
+      // Display social media links if provided
+      if (socialMedia.trim() !== "") {
+        var socialMediaParagraph = document.createElement("p");
+        socialMediaParagraph.innerHTML = "Social Media: " + socialMedia;
+        newMember.appendChild(socialMediaParagraph);
+      }
+
+      container.appendChild(newMember);
+
+      // Clear the form
+      document.getElementById("submission-form").reset();
+    }
+  </script>
+
+</body>
+
+</html>
